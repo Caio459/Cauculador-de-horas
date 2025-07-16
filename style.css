@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.calculator {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #0056b3;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.period-entry {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+}
+
+.period-duration {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #555;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+/* MUDANÇA AQUI: Ajustando o estilo do novo texto informativo */
+.info-text {
+    text-align: center;
+    font-size: 1em; /* Tamanho um pouco maior */
+    font-weight: bold; /* Em negrito */
+    color: #555; /* Cor um pouco mais escura */
+    margin-top: 15px;
+    margin-bottom: 0;
+    min-height: 1.2em; /* Garante que o layout não "pule" */
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#add-period-btn {
+    width: 100%;
+    background-color: #e7f3ff;
+    color: #0056b3;
+}
+
+#add-period-btn:hover {
+    background-color: #d0e7ff;
+}
+
+.remove-period-btn {
+    background-color: #ffdddd;
+    color: #d8000c;
+    width: auto;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+#result {
+    margin-top: 20px;
+    background-color: #e7f3ff;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#result-text {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0056b3;
+    margin: 0;
+}
