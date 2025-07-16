@@ -69,16 +69,21 @@ hr {
     white-space: nowrap;
 }
 
-/* MUDANÇA AQUI: Ajustando o estilo do novo texto informativo */
 .info-text {
     text-align: center;
-    font-size: 1em; /* Tamanho um pouco maior */
-    font-weight: bold; /* Em negrito */
-    color: #555; /* Cor um pouco mais escura */
+    font-size: 1em;
+    font-weight: bold;
+    color: #555;
     margin-top: 15px;
     margin-bottom: 0;
-    min-height: 1.2em; /* Garante que o layout não "pule" */
+    min-height: 1.2em;
 }
+
+/* NOVO ESTILO PARA HORA EXTRA */
+.extra-time {
+    color: #28a745; /* Cor verde para indicar hora extra */
+}
+
 
 button {
     padding: 12px;

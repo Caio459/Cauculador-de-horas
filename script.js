@@ -74,38 +74,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const remainingMinutes = totalMinutesToWork - totalMinutesWorked;
 
-        // Atualiza a informação de tempo restante
-        if (remainingMinutes <= 0) {
-            remainingTimeInfo.innerHTML = "<strong>Jornada Completa!</strong>";
-        } else {
+        // --- LÓGICA ATUALIZADA PARA O TEMPO RESTANTE / HORA EXTRA ---
+        remainingTimeInfo.classList.remove('extra-time'); // Reseta a cor
+
+        if (remainingMinutes > 0) {
             const remainingHours = Math.floor(remainingMinutes / 60);
             const remainingMins = Math.round(remainingMinutes % 60);
             let remainingText = "Faltam: ";
-            if (remainingHours > 0) {
-                remainingText += `<strong>${remainingHours}h</strong> `;
-            }
-            if (remainingMins > 0) {
-                remainingText += `<strong>${remainingMins}m</strong>`;
-            }
+            if (remainingHours > 0) remainingText += `<strong>${remainingHours}h</strong> `;
+            if (remainingMins > 0) remainingText += `<strong>${remainingMins}m</strong>`;
             remainingTimeInfo.innerHTML = remainingText.trim();
+        } else if (remainingMinutes === 0) {
+            remainingTimeInfo.innerHTML = "<strong>Jornada Completa!</strong>";
+        } else { // Se remainingMinutes < 0
+            const extraMinutes = Math.abs(remainingMinutes);
+            const extraHours = Math.floor(extraMinutes / 60);
+            const extraMins = Math.round(extraMinutes % 60);
+            let extraText = "Você fez: ";
+            if (extraHours > 0) extraText += `<strong>${extraHours}h</strong> `;
+            if (extraMins > 0) extraText += `<strong>${extraMins}m</strong>`;
+            remainingTimeInfo.innerHTML = `${extraText.trim()} de hora extra.`;
+            remainingTimeInfo.classList.add('extra-time'); // Adiciona a cor verde
         }
 
-        // Atualiza a informação de horário de saída
+        // --- LÓGICA PARA O HORÁRIO DE SAÍDA ---
         if (lastOpenEntryTime) {
-            const finalEntryDate = new Date(`1970-01-01T${lastOpenEntryTime}`);
-            const departureDate = new Date(finalEntryDate.getTime() + remainingMinutes * 60000);
-            const departureHours = String(departureDate.getHours()).padStart(2, '0');
-            const departureMinutes = String(departureDate.getMinutes()).padStart(2, '0');
-
-            resultText.innerHTML = `Horário de Saída: <strong>${departureHours}:${departureMinutes}</strong>`;
-        
+            if (remainingMinutes > 0) {
+                const finalEntryDate = new Date(`1970-01-01T${lastOpenEntryTime}`);
+                const departureDate = new Date(finalEntryDate.getTime() + remainingMinutes * 60000);
+                const departureHours = String(departureDate.getHours()).padStart(2, '0');
+                const departureMinutes = String(departureDate.getMinutes()).padStart(2, '0');
+                resultText.innerHTML = `Horário de Saída: <strong>${departureHours}:${departureMinutes}</strong>`;
+            } else {
+                resultText.innerHTML = `<strong>Você já pode ir para casa!</strong>`;
+            }
         } else {
-            // --- LÓGICA CORRIGIDA AQUI ---
-            // Se não há períodos abertos, primeiro checamos se a jornada foi concluída.
             if (remainingMinutes <= 0) {
                  resultText.innerHTML = `<strong>Trabalho finalizado!</strong>`;
             } else {
-                // Se a jornada não foi concluída, aí sim pedimos a nova entrada.
                  resultText.textContent = 'Aguardando nova entrada...';
             }
         }
